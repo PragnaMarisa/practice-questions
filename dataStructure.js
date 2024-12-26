@@ -144,8 +144,9 @@ const hobbiesOfPeople = (people) => {
 // 7. How many pets belong to people who are currently unemployed?
 
 const countPetsOfUnEmployed = (people) => {
-  const detailsOfUnEmployed = people.filter((person) => !person.employed);
-  return detailsOfUnEmployed.flatMap((person) => person.pets).length;
+  return people
+    .filter((person) => !person.employed)
+    .flatMap((person) => person.pets).length;
 };
 
 // 8. What is the average age of the individuals mentioned in the passage?
@@ -176,35 +177,27 @@ const countOfOwnersWhoHasMoreThanOnePet = (people) =>
 // 11. Which pets are associated with specific favorite activities?
 
 const petsWithSpecificAcitivities = (pets) => {
-  const petswithFavouriteActivities = pets.filter(
-    ({ favouriteactivity }) => favouriteactivity !== null
-  );
-
-  return petswithFavouriteActivities.map(({ name }) => name);
+  return pets
+    .filter(({ favouriteactivity }) => favouriteactivity !== null)
+    .map(({ name }) => name);
 };
 
 // 12. What are the names of all animals that belong to people who live in Bangalore or Chennai?
 
 const petsBelongToBangloreOrChennai = (people) => {
-  const personsBelongsToBangloreOrChennai = people.filter(({ place }) =>
-    ["Banglore", "Chennai"].includes(place)
-  );
-
-  const petsOfBengloreOrChennai = personsBelongsToBangloreOrChennai.flatMap(
-    ({ pets }) => pets
-  );
-
-  return petsOfBengloreOrChennai.map(({ name }) => name);
+  return people
+    .filter(({ place }) => ["Banglore", "Chennai"].includes(place))
+    .flatMap(({ pets }) => pets)
+    .map(({ name }) => name);
 };
 
 // 13. How many vaccinated pets belong to people who do not own a car?
 
 const vaccinatedPetsOfPeopleDontOwnCar = (people) => {
-  const peopleWhoDontOwnACar = people.filter(({ car }) => !car);
-
-  const pets = peopleWhoDontOwnACar.flatMap(({ pets }) => pets);
-
-  return pets.filter(({ vaccinated }) => vaccinated).length;
+  return people
+    .filter(({ car }) => !car)
+    .flatMap(({ pets }) => pets)
+    .filter(({ vaccinated }) => vaccinated).length;
 };
 
 // 14. What is the most common type of pet among the group?
